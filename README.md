@@ -25,6 +25,7 @@ How to :-
     - Here we can specify any number of routes we want.
     - If specified action or controllers is not there then that route will be ignored with console warning.
     - Note :- Here path will be prefixed with API_NAME/ACTUAL_PATH
+    
 Changelog :- 
  * Create global app/framework variable to access all controllers/services/firebase/middlewares etc
  * Apis added (All apis which are currently on can be found in apis folder in separated api named folder.)
