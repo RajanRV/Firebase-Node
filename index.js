@@ -6,7 +6,7 @@ const verifyPort = (port) => {
     .then(_port => {
     if (port == _port) {
         app.listen(port, () => {
-            console.log(`server started at : http://localhost:${port}/`);
+            console.log(`server started at : http://${app.get('host')}:${port}/`);
         });
     } else {
         if (readlineSync.keyInYN(`port: ${port} is occupied, Change port to: ${_port}?`)) {

@@ -10,6 +10,7 @@ const serverConfig = require('../config/server.json');
 const app = express();
 app.use(express.json());
 app.set('port', serverConfig.port || 3000);
+app.set('host', serverConfig.host || 'localhost');
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
