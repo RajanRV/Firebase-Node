@@ -1,4 +1,4 @@
-const {admin} = require('../core/firebase');
+const {admin} = require('../firebase');
 
 module.exports = {
     validateToken : (req, res, next) => {

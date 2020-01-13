@@ -1,12 +1,22 @@
 # FirebaseNode
-### Version 1.5.0
+### Version 1.6.0
 FirebaseNode is framework that provides very easy Api management and connection with Firebase. With the use of FirebaseNode we can connect with firebase and create apis with them very quickly.
 
 ## Installation
  * Use npm to install FirebaseNode
     ```bash
-    npm i firebasenode
+    sudo npm i -g firebase-node-cli
+    firebase-node-cli new <project_name>
     ```
+   Now use following cmd in root of the project to start server.
+   - For Development Mode
+   ```bash
+   npm run dev
+   ```
+   - For Production Mode
+   ```bash
+   npm start
+   ```
 OR if you clone this repo
 
  * Use this cmd on root of the project.
@@ -59,9 +69,33 @@ OR if you clone this repo
     - Services are defined in apis/{API_NAME}/services direcotry.
     - These services will be accessible with framework.services.{API_NAME}.{SERVICE_FILE_NAME}.{FUNCTION_NAME}
  * Controllers :- 
-    - Controllers are defined in apis{API_NAME}/controllers directory.
+    - Controllers are defined in apis/{API_NAME}/controllers directory.
     - Access services with framework super global variable.
+* Middlewares :- 
+    - Middlewares are defined in apis/{API_NAME}/middlewares directory.
+    - And middlewares can b used in specific route by specifing middlewares: [].
+    - Here we need to specify middleware name (file name) and function to execute in string format concatenated by '.'.
+* Themes :-
+    - Layout, Pages and Prtials can be found in views folder.
+    - In order to use or access pages use res.render() method with the path and name of ejs file inside views folder.
+      - example : 
+      ```JS
+      // if file is in root of views folder.
+      res.render('filename');
+      // if files is inside pages folder.
+      res.render('pages/filename');
+      ```
+    - We can use Partials which can be included in pages.
+    - All partials can be found in partials folder.
+* Global Functions
+    - Global functions are defined in core/functions.js which can be accessed using framework.core.functions.FUNCTION_NAME
+    - These functions can be accessed everywhere in this app.
+
 ## Changelog
+ * implement themes concept
+ * EJS theme engine added.
+ * Everything is moved to Functions folder in the root directory.
+ * implement array of middlewares
  * Create global app/framework variable to access all controllers/services/firebase/middlewares etc
  * Apis added (All apis which are currently on can be found in apis folder in separated api named folder.)
  * Routes added (Now we'll need to just create routes.json containing routes info to define routes)
@@ -74,8 +108,6 @@ OR if you clone this repo
 ## TODO
  * Add cli support to create APIs.
  * implement env-cmd package
- * implement themes concept
  * Make One of the Firebase-admin or Firebase optional.
- * implement array of middlewares
  * implement global middlewares https://expressjs.com/en/guide/routing.html find express.Router
  * Add functions and config to global.

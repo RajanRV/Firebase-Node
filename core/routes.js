@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const { validateToken } = require('../middlewares/firebase_token');
+const { validateToken } = require('./middlewares/firebase_token');
+const decryptRequest = require('./middlewares/decryptRequest');
+const chalk = require('chalk');
 // const { existsSync } = require('fs');
 // const path = require('path');
 // console.log(framework);
@@ -22,7 +24,7 @@ for(let key in apis){
         var controllerArray = routes[route].action.split('.');
 
         /* if controller and actions are not defined as expected */
-        if(controllerArray.length != 2 || !routes[route].path || !routes[route].action){
+        if(controllerArray.length != 2 || !routes[route].path || !routes[route].action){    
             throw `There is an problem with API : '${apis[key]}' ROUTE PATH: ${routes[route].path} METHOD: ${routes[route].method}`;
         }
 
@@ -60,11 +62,40 @@ for(let key in apis){
         }
 
         /* define routes */
-        if(!routes[route].secure){
-            router[routes[route].method](routes[route].path, func);
-        } else {
-            router[routes[route].method](routes[route].path, validateToken, func);
+        var middlewares = [];
+        if(routes[route].secure){
+            middlewares.push(validateToken);
         }
+        if(routes[route].encryptRequest){
+            middlewares.push(decryptRequest);
+        }
+
+        /* fetching middlewares */
+        for(let middleware in routes[route].middlewares){
+            let middlewareMeta = routes[route].middlewares[middleware].split('.');
+            if(middlewareMeta.length != 2){
+                console.log(chalk.yellow('(ignored)'),`There is an Problem with API: ${apis[key]}, Middleware '${chalk.green(routes[route].middlewares[middleware])}' you specified was not in proper format.`);
+                continue;
+            }
+            middlewareMeta = {
+                middleware : middlewareMeta[0],
+                method: middlewareMeta[1]
+            };
+            try{
+                var middlewreFunctions = require(`../apis/${apis[key]}/middlewares/${middlewareMeta.middleware}`);
+            } catch(err){
+                console.log(chalk.yellow('(ignored)'),`There is an Problem with API: ${apis[key]}, Middleware '${chalk.green(routes[route].middlewares[middleware])}' was not accessible.`);
+                continue;
+            }
+            if(!middlewreFunctions[middlewareMeta.method]){
+                console.log(chalk.yellow('(ignored)'),`There is an Problem with API: ${apis[key]}, Middleware '${chalk.green(routes[route].middlewares[middleware])}' was not accessible.`);
+                continue;
+            }
+            middlewares.push(middlewreFunctions[middlewareMeta.method]);
+        }
+
+        middlewares.push(func);
+        router[routes[route].method](routes[route].path, middlewares);
     }
 
 }
