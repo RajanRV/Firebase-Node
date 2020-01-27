@@ -1,5 +1,5 @@
 # FirebaseNode
-### Version 1.6.0
+### Version 1.7.0
 FirebaseNode is framework that provides very easy Api management and connection with Firebase. With the use of FirebaseNode we can connect with firebase and create apis with them very quickly.
 
 ## Installation
@@ -8,7 +8,8 @@ FirebaseNode is framework that provides very easy Api management and connection 
     sudo npm i -g firebase-node-cli
     firebase-node-cli new <project_name>
     ```
-   Now use following cmd in root of the project to start server.
+ * Configure Firebase client and admin.
+ * Now use following cmd in root of the project to start server.
    - For Development Mode
    ```bash
    npm run dev
@@ -90,8 +91,11 @@ OR if you clone this repo
 * Global Functions
     - Global functions are defined in core/functions.js which can be accessed using framework.core.functions.FUNCTION_NAME
     - These functions can be accessed everywhere in this app.
-
+* Defign Paths from root (api routes without merged with api name)
+    - Root Api folder is added inside the apis folder here defined all paths will be served from root. (however we can add root maually in the path attribute in order to use that path).
+    - Other features will work same as normal apis.
 ## Changelog
+ * Api Routes from Root support added
  * implement themes concept
  * EJS theme engine added.
  * Everything is moved to Functions folder in the root directory.

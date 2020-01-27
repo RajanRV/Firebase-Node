@@ -1,0 +1,11 @@
+[
+	{
+        "path": "/",
+        "method": "get",
+        "action": "index.action",
+        "secure": false,
+        "encryptRequest": false,
+        "middlewares": [],
+        "enabled": true
+    }
+]

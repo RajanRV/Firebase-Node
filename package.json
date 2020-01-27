@@ -1,13 +1,13 @@
 {
   "name": "firebasenode",
-  "version": "1.5.0",
-  "description": "Setup :-  * Use this cmd on root of the project.     npm install   * To setup firebase edit config/firebase.js with firebase-admin and firebase configurations (Both of them are required).  * For server configuration edit config/server.json.  * For development run following cmd.     npm run dev  * For production run following cmd.     npm start",
+  "version": "1.7.0",
+  "description": "firebasenode makes well structured api management and makes firebase implementation easy.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
     "start": "node index"
   },
-  "keywords": [],
+  "keywords": ["firebase", "node", "Firebase Node Framework", "Framework", "Fireabase-node", "Rajan", "Rajan Vasani"],
   "author": "Rajan",
   "license": "ISC",
   "dependencies": {

@@ -14,7 +14,10 @@ for(let key in apis){
     var routes = {};
     /* getting all routes */
     routes = require(`../apis/${apis[key]}/routes.json`);
-
+    let root = false;
+    if(apis[key] == 'root'){
+        root = true;
+    }
     /* for each route */ 
     for(let route in routes){
         /* if route is not enabled skip it */
@@ -34,7 +37,7 @@ for(let key in apis){
         }
 
         /* combine route path with api name to avoid conflictions */
-        routes[route].path = '/'+(apis[key]+routes[route].path);
+        routes[route].path = ((root ? '' : '/'+apis[key])+routes[route].path);
         // console.log(routes[route].path);
 
         /* hold extracted controller and action info */
