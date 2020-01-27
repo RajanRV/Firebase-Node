@@ -1,20 +1,18 @@
-const serviceAccount = require('./firebase/ds-develop-a482c-firebase-adminsdk-fcxmb-3f5514f8ef.json');
+const serviceAccount = require('./firebase/test-e5d21-firebase-adminsdk-o109t-6ca4987e3a.json');
 const admin = require("firebase-admin");
 module.exports = {
     firebaseConfig: {
-        apiKey: "AIzaSyDugObAlAqardRBb77HwMkX1I2X4QiNo2M",
-        authDomain: "ds-develop-a482c.firebaseapp.com",
-        databaseURL: "https://ds-develop-a482c.firebaseio.com",
-        projectId: "ds-develop-a482c",
-        storageBucket: "ds-develop-a482c.appspot.com",
-        messagingSenderId: "1093280686810",
-        appId: "1:1093280686810:web:3bd8a636636abba85afbe3",
-        measurementId: "G-LJFM1WK4B6"
-
+        apiKey: "AIzaSyDZlbZroVPBMcuZL_GWQE1B-98pPkbtxwE",
+        authDomain: "test-e5d21.firebaseapp.com",
+        databaseURL: "https://test-e5d21.firebaseio.com",
+        projectId: "test-e5d21",
+        storageBucket: "test-e5d21.appspot.com",
+        messagingSenderId: "412745081190",
+        appId: "1:412745081190:web:b2cda6aae7a8f4daba68a7"
     },
     adminConfig:{
         credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://ds-develop-a482c.firebaseio.com",
-        storageBucket: "ds-develop-a482c.appspot.com"
+        databaseURL: "https://test-e5d21.firebaseio.com",
+        storageBucket: "test-e5d21.appspot.com"
     }
 }
